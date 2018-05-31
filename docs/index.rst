@@ -8,6 +8,7 @@ Welcome to Symphony documentation!
    :glob:
 
    *
+   ./myDir/*
 
 
 
