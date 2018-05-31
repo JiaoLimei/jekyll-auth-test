@@ -4,10 +4,10 @@ Symphony-docs is a documentation repository for Symphony. CircleCI is active and
 
 Markdown and reStructuredText are both supported by the source parser of sphinx-build. You can choose any one as you like to write documents.
 
-## Document Structure
+## Directory Structure
 
 - **docs** is the source directory of sphinx-build. All documents must be placed under **docs**. 
-- You can create subdirectories under **docs** to organize your documents. 
+- You can create **subdirectories** under **docs** to organize your documents. 
 - **docs/index.rst** is the initial documentaiton file. Once you create a new folder under **docs**, you may also need to edit index.rst. 
 
 ## index.rst
@@ -18,8 +18,8 @@ An example is given below. Tables of contents from all those documents are inser
    :caption: Contents:
    :glob:
 
-    BPMN*
+   BPMN*
    symphony-cli/*
    *
 ```
-For more detailed, you can refer to: [http://www.sphinx-doc.org/en/stable/markup/toctree.html](http://www.sphinx-doc.org/en/stable/markup/toctree.html)
+For more detailed, you can refer to: [http://www.sphinx-doc.org/en/stable/markup/index.html](http://www.sphinx-doc.org/en/stable/markup/index.html)
