@@ -1,30 +1,32 @@
-Symphony-docs is a documentation repository for Symphony. CircleCI is active on the repository and any change pushed will trigger an automated sphinx-build to build the documents under **docs** folder to html.
+i# README
+## This is the README for the vscode plugin for cornet
+-------------------
 
-## Document Format
+This folder contains a VSCode extension that do BPMN checks for cornet. Currently, it does the following checks:
 
-**Markdown** and **reStructuredText** are both supported by the source parser of sphinx-build. You can choose any one as you like to write documents.
+- very basic xml syntax check (via a modified version of node-htmlparser in BpmnCompiler)
+- js lint check (via BpmnCompiler)
+- basic bpmn rules check (via Engine.validate)
 
-For rst, you can refer to [http://docutils.sourceforge.net/docs/user/rst/quickref.html](http://docutils.sourceforge.net/docs/user/rst/quickref.html) 
 
-## Directory Structure
+The code for the extension is in the 'client' folder. It uses the 'vscode-languageclient' node module to launch the language server.
 
-- **docs** is the source directory of sphinx-build. All documents must be placed under **docs**. 
-- You can create **subdirectories** under **docs** to organize your documents. We suggest that one Symphony component has only one documentation. If you also have some image files for one document, we suggest to create sub-diretories.
-- **docs/index.rst** is the initial documentaiton file. Once you create a new md/rst file or a new folder under **docs**, you may also want to edit index.rst to arrange the order of documentations. 
-- You can add some key concepts of Symphony and some related external learning resources into **keyconcepts.md** and **learningresource.md**.
+The language server is located in the 'server' folder. 
 
-## index.rst
-An example is given below. Tables of contents from all those documents are inserted, with a maximum depth of two. You can use “globbing” in toctree directives, by giving the glob flag option. All entries are then matched against the list of available documents, and matches are inserted into the list alphabetically. 
-```
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-   :glob:
 
-   keyconcepts
-   bpmn*
-   symphony-cli/*
-   learningresource
-   *
-```
-For more details, you can refer to: [http://www.sphinx-doc.org/en/stable/markup/index.html](http://www.sphinx-doc.org/en/stable/markup/index.html)
+# How to run locally
+* `npm install` to initialize the extension and the server
+* `npm run compile` to compile the extension and the server
+* open the `cornet-vscode-lsp` folder in VS Code. In the Debug viewlet, run 'Launch Client' from drop-down to launch the extension and attach to the extension.
+* create a file `test.txt`, and type `typescript`. You should see a validation error.
+* to debug the server use the 'Attach to Server' launch config.
+* set breakpoints in the client or the server.
+
+# Warning or Error Message
+| Message and Description  | 
+| ------------------------ |
+| **Message** Warning: [ex] Change process id to something meaningful [Process_1]<br> **Cause** Expect a more meaningful name for bpmn:process |
+| **Message** Error: [ex] Cannot find processId (maybe not a BPMN file) <br> **Cause** `id` of bpmn:process should be set. The default value is Process_n. |
+| **Message** Error: [ex] scriptFormat must be defined <br> **Cause** `Script Format` should be set for those section that type is `script`. Only `javascript` is supported for `Script Format`.
+| **Message** Error: [ex] scriptFormat 'xscript' does not support <br> **Cause** Only `javascript` is supported for `Script Format`.
+
